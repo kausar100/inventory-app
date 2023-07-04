@@ -72,7 +72,7 @@ fun InventoryNavHost(
                 type = NavType.IntType
             })
         ) {
-            ItemEditScreen(navigateBack = { navController.popBackStack() },
+            ItemEditScreen(navigateBack = { navController.popBackStack(HomeDestination.route, inclusive = false) },
                 onNavigateUp = { navController.navigateUp() })
         }
     }
