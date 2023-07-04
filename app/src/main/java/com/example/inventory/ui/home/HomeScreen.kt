@@ -19,6 +19,7 @@ package com.example.inventory.ui.home
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +32,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -98,13 +100,21 @@ fun HomeScreen(
             }
         },
     ) { innerPadding ->
-        HomeBody(
-            itemList = homeUiState.itemList,
-            onItemClick = navigateToItemUpdate,
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-        )
+
+        if (homeUiState.itemList.isEmpty()) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
+
+        } else {
+            HomeBody(
+                itemList = homeUiState.itemList,
+                onItemClick = navigateToItemUpdate,
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+            )
+        }
     }
 }
 
